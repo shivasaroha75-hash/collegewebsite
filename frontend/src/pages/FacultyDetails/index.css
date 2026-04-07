@@ -1,0 +1,111 @@
+.faculty-details-page{
+
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:80vh;
+background:#f5f5f5;
+padding:40px;
+
+}
+
+.faculty-profile{
+
+display:flex;
+background:white;
+border-radius:14px;
+box-shadow:0 10px 30px rgba(0,0,0,0.12);
+overflow:hidden;
+max-width:1000px;
+width:100%;
+
+}
+
+/* LEFT PHOTO */
+
+.faculty-photo{
+
+flex:1;
+background:#eee;
+
+}
+
+.faculty-photo img{
+
+width:100%;
+height:100%;
+object-fit:cover;
+
+}
+
+/* RIGHT DETAILS */
+
+.faculty-info{
+
+flex:1;
+padding:50px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+
+}
+
+.faculty-info h1{
+
+font-size:36px;
+color:#ff7a00;
+margin-bottom:25px;
+
+}
+
+.faculty-info p{
+
+font-size:20px;
+margin:12px 0;
+line-height:1.5;
+
+}
+
+.faculty-info span{
+
+display:block;
+font-weight:600;
+color:#444;
+
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.faculty-profile{
+
+flex-direction:column;
+
+}
+
+.faculty-photo img{
+
+height:350px;
+
+}
+
+.faculty-info{
+
+padding:30px;
+
+}
+
+.faculty-info h1{
+
+font-size:28px;
+
+}
+
+.faculty-info p{
+
+font-size:18px;
+
+}
+
+}

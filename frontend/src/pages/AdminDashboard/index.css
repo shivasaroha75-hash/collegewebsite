@@ -1,0 +1,85 @@
+.admin-page{
+padding:40px;
+background:#f7f7f7;
+min-height:100vh;
+}
+
+.admin-title{
+margin-bottom:30px;
+color:#ff6a00;
+}
+
+/* GRID */
+
+.admin-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:25px;
+}
+
+/* CARDS */
+
+.admin-card{
+padding:30px;
+background:white;
+text-decoration:none;
+text-align:center;
+font-weight:bold;
+border-radius:10px;
+color:#333;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+font-size:16px;
+transition:0.3s;
+}
+
+.admin-card:hover{
+transform:translateY(-5px);
+box-shadow:0 8px 20px rgba(0,0,0,0.15);
+color:#ff6a00;
+}
+
+/* LOGOUT */
+
+.logout-btn{
+margin-top:40px;
+padding:12px 24px;
+background:#ff4d4d;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.logout-btn:hover{
+background:#e63939;
+}
+
+/* TABLET */
+
+@media(max-width:900px){
+
+.admin-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+.admin-page{
+padding:20px;
+}
+
+.admin-grid{
+grid-template-columns:1fr;
+}
+
+.admin-card{
+padding:20px;
+font-size:15px;
+}
+
+}

@@ -1,0 +1,248 @@
+/* PAGE */
+
+.professional-page{
+padding:100px 40px;
+background:#f5f7fb;
+position:relative;
+overflow:hidden;
+}
+
+/* DECORATION */
+
+.bg1{
+position:absolute;
+width:300px;
+height:300px;
+background:#f97316;
+opacity:0.08;
+border-radius:50%;
+top:-120px;
+left:-120px;
+}
+
+.bg2{
+position:absolute;
+width:320px;
+height:320px;
+background:#f97316;
+opacity:0.08;
+border-radius:50%;
+bottom:-120px;
+right:-120px;
+}
+
+/* SECTION */
+
+.professional-section{
+max-width:1200px;
+margin:auto;
+position:relative;
+z-index:2;
+}
+
+/* TITLE */
+
+.section-title{
+text-align:center;
+font-size:36px;
+color:#f97316;
+margin-bottom:50px;
+}
+
+/* COURSE GRID */
+
+.course-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:30px;
+}
+
+/* COURSE CARD */
+
+.course-card{
+background:white;
+border-radius:14px;
+padding:25px;
+
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+
+transition:0.3s;
+}
+
+.course-card:hover{
+transform:translateY(-6px);
+box-shadow:0 15px 35px rgba(0,0,0,0.15);
+}
+
+/* COURSE TITLE */
+
+.course-card h3{
+color:#f97316;
+font-size:22px;
+margin-bottom:10px;
+}
+
+/* DESCRIPTION */
+
+.course-desc{
+font-size:14px;
+color:#555;
+line-height:1.6;
+margin-bottom:15px;
+}
+
+/* TECHNOLOGY SECTION */
+
+.course-card h4{
+margin-top:10px;
+margin-bottom:8px;
+color:#333;
+}
+
+/* TECHNOLOGY TAGS */
+
+.tech-list{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+margin-bottom:20px;
+padding:0;
+list-style:none;
+}
+
+.tech-list li{
+background:#fff3ec;
+padding:6px 10px;
+border-radius:6px;
+font-size:13px;
+}
+
+/* TEACHER GRID */
+
+.teacher-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+gap:15px;
+}
+
+/* TEACHER CARD */
+
+.teacher-card{
+background:#fafafa;
+padding:12px;
+border-radius:10px;
+text-align:center;
+box-shadow:0 4px 10px rgba(0,0,0,0.05);
+}
+
+/* IMAGE */
+
+.teacher-card img{
+width:70px;
+height:70px;
+border-radius:50%;
+object-fit:cover;
+border:3px solid #f97316;
+margin-bottom:8px;
+}
+
+/* NAME */
+
+.teacher-card h5{
+font-size:15px;
+margin-bottom:3px;
+}
+
+/* DESIGNATION */
+
+.teacher-card p{
+font-size:13px;
+color:#555;
+}
+
+/* EXPERIENCE */
+
+.teacher-card span{
+font-size:12px;
+color:#888;
+display:block;
+margin-top:2px;
+}
+
+/* DELETE BUTTON */
+
+.delete-btn{
+margin-top:6px;
+background:#f97316;
+color:white;
+border:none;
+padding:4px 10px;
+border-radius:5px;
+font-size:12px;
+cursor:pointer;
+}
+
+.delete-btn:hover{
+background:#ea580c;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+.course-grid{
+grid-template-columns:1fr;
+}
+
+.section-title{
+font-size:30px;
+}
+
+.professional-page{
+padding:70px 20px;
+}
+
+}
+
+.details-btn{
+display:inline-block;
+margin:10px 0;
+padding:8px 14px;
+background:#ff7a00;
+color:white;
+text-decoration:none;
+border-radius:6px;
+font-size:14px;
+}
+
+.course-card{
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+height:100%;
+}
+
+.card-content{
+flex-grow:1;
+}
+
+.bottom-btn{
+margin-top:20px;
+display:block;
+text-align:center;
+background:#ff7a00;
+color:white;
+padding:10px;
+border-radius:6px;
+text-decoration:none;
+font-weight:bold;
+}
+
+.bottom-btn:hover{
+background:#e66900;
+}

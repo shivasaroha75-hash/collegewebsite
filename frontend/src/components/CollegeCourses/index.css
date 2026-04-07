@@ -1,0 +1,210 @@
+/* PAGE */
+
+.courses-page{
+padding:100px 40px;
+background:#f5f7fb;
+}
+
+/* SECTION */
+
+.courses-section{
+max-width:1200px;
+margin:auto;
+}
+
+/* TITLE */
+
+.courses-section h2{
+text-align:center;
+font-size:36px;
+color:#f97316;
+margin-bottom:25px;
+}
+
+/* FILTER BUTTONS */
+
+.course-filter{
+display:flex;
+justify-content:center;
+gap:12px;
+margin-bottom:40px;
+}
+
+.course-filter button{
+background:white;
+border:1px solid #ddd;
+padding:8px 18px;
+border-radius:20px;
+cursor:pointer;
+font-weight:600;
+transition:0.3s;
+}
+
+.course-filter button:hover{
+background:#f97316;
+color:white;
+}
+
+/* GRID */
+
+.courses-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:25px;
+}
+
+/* CARD */
+
+.course-card{
+background:white;
+padding:25px;
+border-radius:12px;
+
+box-shadow:0 8px 25px rgba(0,0,0,0.08);
+
+transition:0.3s;
+cursor:pointer;
+
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+/* HOVER */
+
+.course-card:hover{
+transform:translateY(-6px);
+box-shadow:0 15px 30px rgba(0,0,0,0.15);
+}
+
+/* ICON */
+
+.course-icon{
+width:55px;
+height:55px;
+
+background:#fff3ec;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+border-radius:12px;
+
+font-size:26px;
+
+margin-bottom:10px;
+}
+
+/* TITLE */
+
+.course-card h3{
+font-size:18px;
+color:#222;
+margin-bottom:5px;
+}
+
+/* DURATION */
+
+.duration{
+font-size:14px;
+color:#777;
+}
+
+/* DESCRIPTION */
+
+.description{
+font-size:14px;
+color:#555;
+line-height:1.5;
+}
+
+/* BUTTON */
+
+.course-btn{
+margin-top:10px;
+
+background:#f97316;
+color:white;
+
+border:none;
+
+padding:8px 16px;
+border-radius:6px;
+
+cursor:pointer;
+font-weight:600;
+
+transition:0.3s;
+}
+
+.course-btn:hover{
+background:#ea580c;
+}
+
+/* RESPONSIVE */
+
+/* Tablet */
+
+@media(max-width:1000px){
+
+.courses-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+/* Mobile */
+
+@media(max-width:600px){
+
+.courses-page{
+padding:70px 20px;
+}
+
+.courses-grid{
+grid-template-columns:1fr;
+}
+
+.courses-section h2{
+font-size:28px;
+}
+
+}
+
+.course-form{
+display:flex;
+gap:12px;
+flex-wrap:wrap;
+margin-bottom:25px;
+background:white;
+padding:15px;
+border-radius:8px;
+box-shadow:0 3px 8px rgba(0,0,0,0.1);
+}
+
+.course-form input{
+padding:8px;
+border:1px solid #ddd;
+border-radius:5px;
+}
+
+.course-form button{
+background:#ff7a00;
+color:white;
+border:none;
+padding:8px 18px;
+border-radius:5px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.delete-course{
+margin-top:10px;
+background:#ff4d4d;
+color:white;
+border:none;
+padding:6px 12px;
+border-radius:5px;
+cursor:pointer;
+}

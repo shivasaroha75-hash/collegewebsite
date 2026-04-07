@@ -1,0 +1,181 @@
+/* PAGE */
+
+.admission-section{
+padding:100px 40px;
+background:#f5f7fb;
+}
+
+/* TITLE */
+
+.admission-section h2{
+text-align:center;
+font-size:36px;
+color:#f97316;
+margin-bottom:30px;
+}
+
+/* FORM */
+
+.admission-form{
+display:flex;
+flex-direction:column;
+gap:12px;
+max-width:500px;
+margin:0 auto 40px auto;
+}
+
+.admission-form input,
+.admission-form textarea{
+padding:10px;
+border:1px solid #ddd;
+border-radius:6px;
+font-size:14px;
+}
+
+.admission-form textarea{
+min-height:90px;
+resize:vertical;
+}
+
+.admission-form button{
+background:#f97316;
+color:white;
+border:none;
+padding:10px;
+border-radius:6px;
+font-weight:600;
+cursor:pointer;
+}
+
+.admission-form button:hover{
+background:#ea580c;
+}
+
+/* GRID */
+
+.admission-list{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:25px;
+}
+
+/* CARD */
+
+.admission-card{
+background:white;
+padding:20px;
+border-radius:12px;
+
+box-shadow:0 8px 25px rgba(0,0,0,0.08);
+
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+
+transition:0.3s;
+}
+
+.admission-card:hover{
+transform:translateY(-5px);
+box-shadow:0 12px 30px rgba(0,0,0,0.15);
+}
+
+/* LEFT */
+
+.admission-left{
+display:flex;
+gap:12px;
+align-items:flex-start;
+}
+
+/* ICON */
+
+.admission-icon{
+font-size:28px;
+background:#fff3ec;
+width:45px;
+height:45px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+border-radius:10px;
+}
+
+/* TEXT */
+
+.admission-left h4{
+font-size:16px;
+margin-bottom:5px;
+}
+
+.admission-left p{
+font-size:14px;
+color:#555;
+}
+
+/* RIGHT BUTTONS */
+
+.admission-right{
+margin-top:15px;
+display:flex;
+gap:10px;
+}
+
+/* VIEW BUTTON */
+
+.admission-right a{
+background:#f97316;
+color:white;
+padding:6px 14px;
+border-radius:6px;
+text-decoration:none;
+font-size:13px;
+}
+
+.admission-right a:hover{
+background:#ea580c;
+}
+
+/* DELETE */
+
+.delete-admission{
+background:#ff4d4d;
+color:white;
+border:none;
+padding:6px 12px;
+border-radius:6px;
+cursor:pointer;
+font-size:13px;
+}
+
+.delete-admission:hover{
+background:#e63946;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1000px){
+
+.admission-list{
+grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+@media(max-width:600px){
+
+.admission-section{
+padding:70px 20px;
+}
+
+.admission-list{
+grid-template-columns:1fr;
+}
+
+.admission-section h2{
+font-size:28px;
+}
+
+}

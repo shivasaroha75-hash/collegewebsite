@@ -1,0 +1,466 @@
+POST http://localhost:5000/api/admin/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin123"
+}
+
+### Add Notice with PDF
+POST http://localhost:5000/api/notices
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc3MjIwNTU3MiwiZXhwIjoxNzcyMjA5MTcyfQ.jV89HyW-J7NXctHsOpKtdB4Qo4kxY6FEivtRA3a4b9k
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="title"
+
+College Holiday Notice
+--boundary
+Content-Disposition: form-data; name="description"
+
+College will remain closed tomorrow due to administrative reasons.
+--boundary
+Content-Disposition: form-data; name="pdf"; filename="notice.pdf"
+Content-Type: application/pdf
+
+< ./notice.pdf
+--boundary--
+
+### Get All Notices
+GET http://localhost:5000/api/notices
+
+### Update Notice (no PDF change)
+PUT http://localhost:5000/api/notices/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc3MjIwNTU3MiwiZXhwIjoxNzcyMjA5MTcyfQ.jV89HyW-J7NXctHsOpKtdB4Qo4kxY6FEivtRA3a4b9k
+Content-Type: application/json
+
+{
+  "title": "Updated Holiday Notice",
+  "description": "College will remain closed for two days."
+}
+
+### Update Notice with PDF
+PUT http://localhost:5000/api/notices/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc3MjIwNTU3MiwiZXhwIjoxNzcyMjA5MTcyfQ.jV89HyW-J7NXctHsOpKtdB4Qo4kxY6FEivtRA3a4b9k
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="title"
+
+Updated Notice With PDF
+--boundary
+Content-Disposition: form-data; name="description"
+
+PDF has been updated.
+--boundary
+Content-Disposition: form-data; name="pdf"; filename="updated_notice.pdf"
+Content-Type: application/pdf
+
+< ./updated_notice.pdf
+--boundary--
+
+### Add Admission Notice with PDF
+POST http://localhost:5000/api/admissions
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc3MjIwOTQ0MywiZXhwIjoxNzcyMjEzMDQzfQ.897QIri-CJ-Jex8pmtXcWaeOOrZiCIwBndx2mVBaFqQ
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="title"
+
+Admission Open 2026
+--boundary
+Content-Disposition: form-data; name="description"
+
+Admissions are open for session 2026–27.
+--boundary
+Content-Disposition: form-data; name="pdf"; filename="admission.pdf"
+Content-Type: application/pdf
+
+< ./admission.pdf
+--boundary--
+
+### Get All Admission Notices
+GET http://localhost:5000/api/admissions
+
+###
+### Update Admission (no PDF)
+PUT http://localhost:5000/api/admissions/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc3MjIwOTQ0MywiZXhwIjoxNzcyMjEzMDQzfQ.897QIri-CJ-Jex8pmtXcWaeOOrZiCIwBndx2mVBaFqQ
+Content-Type: application/json
+
+{
+  "title": "Admission Open 2026–27 (Updated)",
+  "description": "Admissions extended till 31 July."
+}
+
+### Update Admission with PDF
+### Update Admission (with PDF)
+PUT http://localhost:5000/api/admissions/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc3MjIwOTQ0MywiZXhwIjoxNzcyMjEzMDQzfQ.897QIri-CJ-Jex8pmtXcWaeOOrZiCIwBndx2mVBaFqQ
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="title"
+
+Admission Updated With PDF
+--boundary
+Content-Disposition: form-data; name="description"
+
+Updated PDF attached.
+--boundary
+Content-Disposition: form-data; name="pdf"; filename="admission_updated.pdf"
+Content-Type: application/pdf
+
+< ./admission_updated.pdf
+--boundary--
+
+### Delete Admission
+DELETE http://localhost:5000/api/admissions/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc3MjI1MzU4MiwiZXhwIjoxNzcyMjU3MTgyfQ.ggxPpW9UQqFl1YBT-6GKliEq6wqASs-xgW-ffG7fFes
+
+### Add or Update Principal
+POST http://localhost:5000/api/principal
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc3MjI1MzU4MiwiZXhwIjoxNzcyMjU3MTgyfQ.ggxPpW9UQqFl1YBT-6GKliEq6wqASs-xgW-ffG7fFes
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="name"
+
+Prof. Prateet Kumar
+--boundary
+Content-Disposition: form-data; name="designation"
+
+Principal
+--boundary
+Content-Disposition: form-data; name="message"
+
+Our mission is to provide quality higher education and holistic development to students.
+--boundary
+Content-Disposition: form-data; name="photo"; filename="https://res.cloudinary.com/dbadovsja/image/upload/v1772171366/prof_plaveh.jpg"
+Content-Type: image/jpeg
+
+< ./principal.jpg
+--boundary--
+
+### Get Principal
+GET http://localhost:5000/api/principal
+
+### Add Faculty
+### Add Faculty
+POST http://localhost:5000/api/faculty
+Authorization: Bearer YOUR_TOKEN_HERE
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="name"
+
+Ankur Tomar
+--boundary
+Content-Disposition: form-data; name="department"
+
+Office
+--boundary
+Content-Disposition: form-data; name="designation"
+
+Head Clerk
+--boundary
+Content-Disposition: form-data; name="qualification"
+
+B.Com
+--boundary
+Content-Disposition: form-data; name="experience"
+
+5 Years
+--boundary
+Content-Disposition: form-data; name="photo"; filename="ankur.jpg"
+Content-Type: image/jpeg
+
+< ./ankur.jpg
+--boundary--
+
+### Get Faculty
+GET http://localhost:5000/api/faculty
+
+
+### Update Faculty
+PUT http://localhost:5000/api/faculty/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc3MjI1MzU4MiwiZXhwIjoxNzcyMjU3MTgyfQ.ggxPpW9UQqFl1YBT-6GKliEq6wqASs-xgW-ffG7fFes
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="name"
+
+Ankur Tomar
+--boundary
+Content-Disposition: form-data; name="department"
+
+Office
+--boundary
+Content-Disposition: form-data; name="designation"
+
+Head Clerk
+--boundary
+Content-Disposition: form-data; name="qualification"
+
+B.Com
+--boundary
+Content-Disposition: form-data; name="experience"
+
+6 Years
+--boundary
+Content-Disposition: form-data; name="photo"; filename="ankur.jpg"
+Content-Type: image/jpeg
+
+< ./ankur.jpg
+--boundary--
+
+
+### Delete Faculty
+DELETE http://localhost:5000/api/faculty/5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc3MjI1MzU4MiwiZXhwIjoxNzcyMjU3MTgyfQ.ggxPpW9UQqFl1YBT-6GKliEq6wqASs-xgW-ffG7fFes
+
+### Add Gallery Image
+POST http://localhost:5000/api/gallery
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc3MjU1NDIyOCwiZXhwIjoxNzcyNTU3ODI4fQ.LTfVhN4UnIHxPFeFg1Gi8gVpWl4_jKKt3LAehoExibs
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="title"
+
+College Campus
+--boundary
+Content-Disposition: form-data; name="image"; filename="prateet.jpeg"
+Content-Type: image/jpeg
+
+< ./prateet.jpeg
+--boundary--
+
+### Get Gallery
+GET http://localhost:5000/api/gallery
+
+### Delete Gallery Image
+DELETE http://localhost:5000/api/gallery/12
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc3MjU1NDIyOCwiZXhwIjoxNzcyNTU3ODI4fQ.LTfVhN4UnIHxPFeFg1Gi8gVpWl4_jKKt3LAehoExibs
+
+###
+POST http://localhost:5000/api/professional-courses
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc3MjI1NzI4OCwiZXhwIjoxNzcyMjYwODg4fQ.qHfRNmc6qp5NU57OWsZfts4tsLofJ2odQ5gDuNvFisA
+Content-Type: application/json
+
+{
+  "course_name": "3D Animation",
+  "description": "This course teaches modeling, animation, VFX and creative design skills."
+}
+
+###
+POST http://localhost:5000/api/it-technologies
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc3MjI1NzI4OCwiZXhwIjoxNzcyMjYwODg4fQ.qHfRNmc6qp5NU57OWsZfts4tsLofJ2odQ5gDuNvFisA
+Content-Type: application/json
+
+{
+  "tech_name": "HTML",
+  "description": "Used to create the structure and content of web pages.",
+  "career_scope": "Web Designer, Frontend Developer"
+}
+
+
+###
+GET http://localhost:5000/api/it-technologies
+
+###
+GET http://localhost:5000/api/professional-courses
+
+###
+POST http://localhost:5000/api/animation-technologies
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc3MjI2MTA3NCwiZXhwIjoxNzcyMjY0Njc0fQ.isOuuPKtFymVX7paidrKYQWXzxD3D2awuvbCHpydloA
+Content-Type: application/json
+
+{
+  "tech_name": "CorelDRAW",
+  "description": "Used for illustration and 2D film making and graphic design.",
+  "career_scope": "2D Animator ,Graphic designer"
+}
+
+
+###
+GET http://localhost:5000/api/animation-technologies
+
+
+###
+DELETE http://localhost:5000/api/animation-technologies/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc3MjI2MTA3NCwiZXhwIjoxNzcyMjY0Njc0fQ.isOuuPKtFymVX7paidrKYQWXzxD3D2awuvbCHpydloA
+
+
+###
+POST http://localhost:5000/api/course-teachers
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc3MjgxMDY4MywiZXhwIjoxNzcyODE0MjgzfQ.POwyhp-5pJsrKAm2miooiiPyjIl_4HCTv1dk9Tf0VM4
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="name"
+
+Mr. Amarnath Chaurasia
+--boundary
+Content-Disposition: form-data; name="designation"
+
+Animation Teacher
+--boundary
+Content-Disposition: form-data; name="experience"
+
+12+ Years
+--boundary
+Content-Disposition: form-data; name="course_type"
+
+Animation
+--boundary
+Content-Disposition: form-data; name="photo"; filename="ajay.jpg"
+Content-Type: image/jpeg
+
+< ./amar.jpg
+--boundary--
+
+###
+GET http://localhost:5000/api/course-teachers
+
+###
+DELETE http://localhost:5000/api/course-teachers/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc3MjgxMDY4MywiZXhwIjoxNzcyODE0MjgzfQ.POwyhp-5pJsrKAm2miooiiPyjIl_4HCTv1dk9Tf0VM4
+###
+### Update Course Teacher (with new photo)
+PUT http://localhost:5000/api/course-teachers/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc3MjgxMDY4MywiZXhwIjoxNzcyODE0MjgzfQ.POwyhp-5pJsrKAm2miooiiPyjIl_4HCTv1dk9Tf0VM4
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="name"
+
+Mr. Ajay Nayak
+--boundary
+Content-Disposition: form-data; name="designation"
+
+IT Teacher
+--boundary
+Content-Disposition: form-data; name="experience"
+
+1+ Years
+--boundary
+Content-Disposition: form-data; name="course_type"
+
+IT
+--boundary
+Content-Disposition: form-data; name="photo"; filename="ajay.jpeg"
+Content-Type: image/jpeg
+
+< ./ajay.jpeg
+--boundary--
+
+### Add BA Course
+POST http://localhost:5000/api/college-courses
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc3MzQ2NDYyMywiZXhwIjoxNzczNDY4MjIzfQ.hhELeh3v4wr4vUaW_otftvd8tWD847xLeV_oLcGLYy0
+Content-Type: application/json
+
+{
+  "course_name": "B.A. (Bachelor of Arts)",
+  "duration": "3 Years",
+  "description": "Bachelor of Arts is a three year undergraduate degree program focusing on humanities, social sciences and languages.",
+  "subjects": "History, Political Science, Sociology, Economics, Hindi, English",
+  "syllabus": "Semester 1: History, Hindi\nSemester 2: Political Science, English\nSemester 3: Sociology\nSemester 4: Economics\nSemester 5: Advanced Subjects\nSemester 6: Final Project"
+}
+
+
+###
+GET http://localhost:5000/api/college-courses
+
+
+### Update BA Course
+PUT http://localhost:5000/api/college-courses/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc3MzQ2NDYyMywiZXhwIjoxNzczNDY4MjIzfQ.hhELeh3v4wr4vUaW_otftvd8tWD847xLeV_oLcGLYy0
+Content-Type: application/json
+
+{
+  "course_name": "B.A. (Bachelor of Arts) - Updated",
+  "duration": "3 Years",
+  "description": "Bachelor of Arts is a three year undergraduate degree program focusing on humanities, social sciences and languages. Updated description.",
+  "subjects": "History, Political Science, Sociology, Economics, Hindi, English, Philosophy",
+  "syllabus": "Semester 1: History, Hindi\nSemester 2: Political Science, English\nSemester 3: Sociology\nSemester 4: Economics\nSemester 5: Advanced Subjects\nSemester 6: Final Project"
+}
+
+
+
+###
+GET http://localhost:5000/api/professional-courses
+
+###
+DELETE http://localhost:5000/api/professional-courses/5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc3Mzg5ODEyNywiZXhwIjoxNzczOTAxNzI3fQ.gEWVR8s_VZIYXLhwWSs5NbAlzgfyWAmOfWmQA6KsFpE
+
+
+### Update Animation Course Details
+PUT http://localhost:5000/api/professional-courses/2
+Content-Type: application/json
+
+{
+  "details": "1. Introduction\nThe 3D Animation Training Program has been introduced at Chaudhary Charan Singh Rajkiya Mahavidyalaya, Chhaprauli, Baghpat under the National Skill Development Corporation (NSDC). The program aims to equip students with industry-relevant skills in animation, digital design, and creative media technologies.\n\n2. Course Overview\nThe course focuses on developing students' skills in digital animation, visual storytelling, and creative production. Students learn to create 3D models and animations using modern animation tools through practical and project-based learning.\n\n3. Course Duration\nThe duration of the 3D Animation Training Program is 12 months, combining theoretical learning with practical animation projects.\n\n4. Software & Tools Covered\n• Autodesk Maya\n• Blender\n• Adobe Illustrator (AI) – used for film-making related design and visual elements\n\n5. Student Participation & Batch Details\nThe first batch consisting of 45 students commenced on 15 October 2024 and successfully completed the program. A total of 31 students completed the training, out of which 10 students secured placements in companies related to animation, design, and media industries. A second batch is currently running with 28 students actively undergoing training.\n\n6. Infrastructure & Facilities\n• Computer laboratory for animation training\n• Internet connectivity for accessing software and learning resources\n• High-performance systems suitable for animation work\n• Technical learning environment for practical training\n\n7. Practical Learning & Projects\nStudents participate in hands-on projects such as 3D modeling, animation exercises, digital design work, and creative media assignments to gain practical industry exposure.\n\n8. Accessibility of the Program\nThe program is offered completely free of cost under the NSDC initiative, allowing students to access high-quality training in animation and multimedia without financial barriers.\n\n9. Impact of the Program\n• Improved skills in 3D animation and digital design\n• Enhanced creativity and visual storytelling abilities\n• Increased confidence in using professional animation software\n• Better career opportunities in the animation and media industry\n\n10. Conclusion\nThe 3D Animation Training Program at Chaudhary Charan Singh Rajkiya Mahavidyalaya has contributed significantly to promoting creative skill development among students by providing industry-relevant training and practical exposure."
+}
+
+### Add Syllabus
+POST http://localhost:5000/api/student-resources
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc3NDMzNDY0MiwiZXhwIjoxNzc0MzM4MjQyfQ.UzrPYWOD8_4hsBG8zmXfMYitiOe1EjF-LP9ceFNRIjE
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="title"
+
+B.A. Semester 1 Syllabus
+--boundary
+Content-Disposition: form-data; name="type"
+
+syllabus
+--boundary
+Content-Disposition: form-data; name="file"; filename="syllabus.pdf"
+Content-Type: application/pdf
+
+< ./syllabus.pdf
+--boundary--
+
+### Get Resources
+GET http://localhost:5000/api/student-resources
+
+### Delete Resource
+DELETE http://localhost:5000/api/student-resources/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc3NDMzNDY0MiwiZXhwIjoxNzc0MzM4MjQyfQ.UzrPYWOD8_4hsBG8zmXfMYitiOe1EjF-LP9ceFNRIjE
+
+
+### Send OTP
+POST http://localhost:5000/api/send-otp
+Content-Type: application/json
+
+{
+  "phone": "6395195767"
+}
+
+### Verify OTP
+POST http://localhost:5000/api/verify-otp
+Content-Type: application/json
+
+{
+  "phone": "6395195767",
+  "otp": "291959"
+}
+
+### Send OTP Email
+POST http://localhost:5000/api/send-otp-email
+Content-Type: application/json
+
+{
+  "email": "shivasaroha75@gmail.com"
+}
+
+### Verify OTP Email
+POST http://localhost:5000/api/verify-otp-email
+Content-Type: application/json
+
+{
+  "email": "shivasaroha75@gmail.com",
+  "otp": "308004"
+}

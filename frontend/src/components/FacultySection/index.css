@@ -1,0 +1,144 @@
+.faculty-page{
+padding:40px 15px;
+background:#f4f6f9;
+min-height:100vh;
+}
+
+.faculty-section{
+max-width:1200px;
+margin:auto;
+}
+
+.faculty-title{
+text-align:center;
+font-size:28px;
+color:#ff7a00;
+margin-bottom:30px;
+}
+
+/* GRID */
+.faculty-list{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,280px));
+justify-content:center;
+gap:25px;
+}
+
+/* CARD */
+.faculty-card{
+background:white;
+border-radius:14px;
+padding:20px;
+text-align:center;
+box-shadow:0 6px 20px rgba(0,0,0,0.08);
+transition:0.3s;
+}
+
+.faculty-card:hover{
+transform:translateY(-6px);
+box-shadow:0 12px 25px rgba(0,0,0,0.12);
+}
+
+/* LINK FIX */
+.faculty-link{
+text-decoration:none;
+color:inherit;
+display:block;
+}
+
+/* IMAGE */
+.faculty-card img{
+width:85px;
+height:85px;
+border-radius:50%;
+object-fit:cover;
+border:3px solid #ff7a00;
+margin-bottom:10px;
+}
+
+/* NAME */
+.faculty-card h3{
+margin:5px 0;
+font-size:17px;
+}
+
+/* DEPT */
+.dept{
+color:#ff7a00;
+font-size:14px;
+font-weight:500;
+}
+
+/* DESIGNATION */
+.designation{
+font-size:13px;
+color:#666;
+}
+
+/* EXPERIENCE BADGE */
+.exp{
+display:inline-block;
+margin-top:6px;
+font-size:12px;
+background:#fff3e6;
+color:#ff7a00;
+padding:4px 8px;
+border-radius:20px;
+}
+
+/* ADMIN BUTTONS */
+.faculty-admin-btns{
+margin-top:10px;
+display:flex;
+justify-content:center;
+gap:8px;
+}
+
+.edit-btn{
+background:#3498db;
+color:white;
+border:none;
+padding:5px 10px;
+border-radius:5px;
+cursor:pointer;
+}
+
+.delete-btn{
+background:red;
+color:white;
+border:none;
+padding:5px 10px;
+border-radius:5px;
+cursor:pointer;
+}
+
+/* FORM */
+.faculty-form{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+justify-content:center;
+margin-bottom:30px;
+}
+
+.faculty-form input{
+padding:8px;
+border:1px solid #ccc;
+border-radius:6px;
+}
+
+.faculty-form button{
+background:#ff7a00;
+color:white;
+border:none;
+padding:8px 16px;
+border-radius:6px;
+cursor:pointer;
+}
+
+/* MOBILE */
+@media(max-width:600px){
+.faculty-card{
+padding:18px;
+}
+}
