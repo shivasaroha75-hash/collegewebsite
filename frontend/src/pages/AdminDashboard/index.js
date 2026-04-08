@@ -4,7 +4,7 @@ import "./index.css";
 
 function AdminDashboard() {
 
-const navigate = useNavigate();
+
 
 
 
