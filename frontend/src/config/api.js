@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:5000";
+const API_BASE_URL = "https://collegewebsite-3i4j.onrender.com";
 
 export const API = {
   BASE: API_BASE_URL,
