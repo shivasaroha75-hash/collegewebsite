@@ -7,7 +7,7 @@ background:linear-gradient(135deg,#ff7a18,#ffb347);
 }
 
 .login-box{
-background:white;
+background:#fff;
 padding:40px;
 border-radius:12px;
 width:320px;
@@ -26,18 +26,31 @@ padding:10px;
 margin:10px 0;
 border-radius:6px;
 border:1px solid #ccc;
+outline:none;
+}
+
+.password-box{
+position:relative;
+}
+
+.toggle{
+position:absolute;
+right:10px;
+top:50%;
+transform:translateY(-50%);
+cursor:pointer;
 }
 
 .login-box button{
 width:100%;
 padding:10px;
-margin-top:10px;
 background:#ff7a18;
-color:white;
+color:#fff;
 border:none;
 border-radius:6px;
 cursor:pointer;
 font-weight:bold;
+margin-top:10px;
 }
 
 .login-box button:hover{
@@ -47,17 +60,5 @@ background:#e56700;
 .error{
 color:red;
 margin-top:10px;
-}
-
-.timer{
-margin-top:10px;
-color:#555;
-}
-
-.resend{
-background:none;
-border:none;
-color:#ff7a18;
-cursor:pointer;
-margin-top:10px;
+font-size:14px;
 }

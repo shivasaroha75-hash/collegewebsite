@@ -32,7 +32,7 @@ setFiltered(data);
 
 };
 
-/* FILTER */
+/* 🔥 FILTER (same logic, improved safe) */
 
 useEffect(()=>{
 
@@ -40,10 +40,14 @@ if(category === "ALL"){
 setFiltered(courses);
 }
 else if(category === "UG"){
-setFiltered(courses.filter(c => c.course_name.startsWith("B")));
+setFiltered(
+courses.filter(c => c.course_name?.toUpperCase().startsWith("B"))
+);
 }
 else if(category === "PG"){
-setFiltered(courses.filter(c => c.course_name.startsWith("M")));
+setFiltered(
+courses.filter(c => c.course_name?.toUpperCase().startsWith("M"))
+);
 }
 
 },[category,courses]);
@@ -84,7 +88,6 @@ loadCourses();
 const handleDelete = async(id)=>{
 
 const confirmDelete = window.confirm("Delete course?");
-
 if(!confirmDelete) return;
 
 await fetch(`${API.BASE}/api/college-courses/${id}`,{
@@ -157,11 +160,30 @@ Add Course
 
 )}
 
+{/* 🔥 FILTER BUTTONS WITH ACTIVE STYLE */}
+
 <div className="course-filter">
 
-<button onClick={()=>setCategory("ALL")}>All</button>
-<button onClick={()=>setCategory("UG")}>UG Courses</button>
-<button onClick={()=>setCategory("PG")}>PG Courses</button>
+<button
+className={category==="ALL" ? "active":""}
+onClick={()=>setCategory("ALL")}
+>
+All
+</button>
+
+<button
+className={category==="UG" ? "active":""}
+onClick={()=>setCategory("UG")}
+>
+UG Courses
+</button>
+
+<button
+className={category==="PG" ? "active":""}
+onClick={()=>setCategory("PG")}
+>
+PG Courses
+</button>
 
 </div>
 

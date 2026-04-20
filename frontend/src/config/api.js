@@ -9,7 +9,9 @@ export const API = {
 
 export const FILES = {
   FACULTY: `${API_BASE_URL}/uploads/faculty`,
+  STUDENTS: `${API.BASE}/uploads/students`,
   NOTICES: `${API_BASE_URL}/uploads/notices`,
   RESOURCES: `${API_BASE_URL}/uploads/resources`,
-  GALLERY: `${API_BASE_URL}/uploads/gallery`,   // 👈 ADD THIS
+  GALLERY: `${API_BASE_URL}/uploads/gallery`,
+  ADMISSIONS: `${API_BASE_URL}/uploads/admissions`,   // 👈 ADD THIS
 };

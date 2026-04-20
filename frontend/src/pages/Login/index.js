@@ -1,50 +1,23 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { API } from "../../config/api";
 import "./index.css";
 
 function Login(){
 
-const [email,setEmail] = useState("");
-const [otp,setOtp] = useState("");
-const [showOtp,setShowOtp] = useState(false);
-const [loading,setLoading] = useState(false);
+const [username,setUsername] = useState("");
+const [password,setPassword] = useState("");
+const [showPassword,setShowPassword] = useState(false);
 const [error,setError] = useState("");
-const [timer,setTimer] = useState(0);
+const [loading,setLoading] = useState(false);
 
 const navigate = useNavigate();
 
+const handleLogin = async (e)=>{
+e.preventDefault();
 
-// ✅ already login check
-useEffect(()=>{
-const token = localStorage.getItem("token");
-if(token){
-navigate("/admin");
-}
-},[navigate]);
-
-
-// ⏱ TIMER FUNCTION
-const startTimer = ()=>{
-setTimer(30);
-
-const interval = setInterval(()=>{
-setTimer(prev=>{
-if(prev <= 1){
-clearInterval(interval);
-return 0;
-}
-return prev - 1;
-});
-},1000);
-};
-
-
-// 📩 SEND OTP
-const handleSendOtp = async ()=>{
-
-if(!email){
-setError("Enter email");
+if(!username || !password){
+setError("Enter username & password");
 return;
 }
 
@@ -53,60 +26,19 @@ setLoading(true);
 
 try{
 
-const res = await fetch(`${API.BASE}/api/send-otp-email`,{
+const res = await fetch(`${API.BASE}/api/admin/login`,{
 method:"POST",
 headers:{ "Content-Type":"application/json" },
-body: JSON.stringify({ email })
+body: JSON.stringify({ username, password })
 });
 
 const data = await res.json();
 
 if(res.ok){
-setShowOtp(true);
-startTimer();
-}else{
-setError(data.message || "Failed to send OTP");
-}
-
-}catch{
-setError("Server error");
-}
-
-setLoading(false);
-};
-
-
-// 🔐 VERIFY OTP
-const handleVerify = async ()=>{
-
-if(!otp){
-setError("Enter OTP");
-return;
-}
-
-setError("");
-setLoading(true);
-
-try{
-
-const res = await fetch(`${API.BASE}/api/verify-otp-email`,{
-method:"POST",
-headers:{ "Content-Type":"application/json" },
-body: JSON.stringify({ email, otp })
-});
-
-const data = await res.json();
-
-if(res.ok){
-
-// ✅ save token
-localStorage.setItem("token",data.token);
-
-// ✅ redirect
+localStorage.setItem("token", data.token);
 navigate("/admin");
-
 }else{
-setError(data.message || "Invalid OTP");
+setError(data.message || "Login failed");
 }
 
 }catch{
@@ -115,7 +47,6 @@ setError("Server error");
 
 setLoading(false);
 };
-
 
 return(
 
@@ -123,51 +54,49 @@ return(
 
 <div className="login-box">
 
-<h2>🔒 Secure Login</h2>
+<h2>🔐 Admin Login</h2>
 
-{/* EMAIL INPUT */}
+{/* ❌ AUTOFILL OFF */}
+<form onSubmit={handleLogin} autoComplete="off">
+
+{/* USERNAME */}
 <input
-type="email"
-placeholder="Enter your email"
-value={email}
-onChange={(e)=>setEmail(e.target.value)}
-/>
-
-{/* SEND OTP */}
-{!showOtp && (
-<button onClick={handleSendOtp}>
-{loading ? "Sending..." : "Send OTP"}
-</button>
-)}
-
-{/* OTP INPUT */}
-{showOtp && (
-<>
-<input
+name="random-user"
 type="text"
-placeholder="Enter OTP"
-value={otp}
-onChange={(e)=>setOtp(e.target.value)}
+placeholder="Enter Username"
+value={username}
+onChange={(e)=>setUsername(e.target.value)}
+autoComplete="off"
 />
 
-<button onClick={handleVerify}>
-{loading ? "Verifying..." : "Verify & Login"}
+{/* PASSWORD */}
+<div className="password-box">
+
+<input
+name="random-pass"
+type={showPassword ? "text":"password"}
+placeholder="Enter Password"
+value={password}
+onChange={(e)=>setPassword(e.target.value)}
+autoComplete="new-password"
+/>
+
+<span
+className="toggle"
+onClick={()=>setShowPassword(!showPassword)}
+>
+{showPassword ? "🙈":"👁"}
+</span>
+
+</div>
+
+<button type="submit">
+{loading ? "Logging in..." : "Login"}
 </button>
 
-{/* ⏱ RESEND */}
-{timer > 0 ? (
-<p className="timer">Resend in {timer}s</p>
-) : (
-<button className="resend" onClick={handleSendOtp}>
-Resend OTP
-</button>
-)}
-
-</>
-)}
-
-{/* ERROR */}
 {error && <p className="error">{error}</p>}
+
+</form>
 
 </div>
 

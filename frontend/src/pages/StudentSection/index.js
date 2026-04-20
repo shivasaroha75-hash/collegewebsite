@@ -38,7 +38,7 @@ onClick={()=>setActiveTab("syllabus")}
 className={activeTab==="timetable" ? "active" : ""}
 onClick={()=>setActiveTab("timetable")}
 >
-📅 Timetable
+📅 Examination
 </button>
 
 </div>
@@ -56,7 +56,7 @@ filtered.map(item => (
 
 <div className="left">
 <h4>{item.title}</h4>
-<span>{item.type}</span>
+
 </div>
 
 <a

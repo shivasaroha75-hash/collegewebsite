@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { API } from "../../config/api";   // 👈 IMPORTANT
+import { API, FILES } from "../../config/api";
 import "./index.css";
 
 function NoticeSection() {
@@ -16,6 +16,8 @@ useEffect(()=>{
 loadAllData();
 },[]);
 
+
+// 🔥 LOAD ALL DATA
 const loadAllData = ()=>{
 
 Promise.all([
@@ -50,19 +52,31 @@ id: s.id,
 title: s.title,
 desc: s.type,
 date: "",
-type: "Student",
+type: "Student",   // 🔥 IMPORTANT
 pdf: s.file
 }))
 
 ];
 
-// 🔥 sort latest first
+// 🔥 SORT
 formatted.sort((a,b)=> new Date(b.date) - new Date(a.date));
 
 setData(formatted);
 
 });
 
+};
+
+
+// 🔥 FILE URL FIX
+const getFileUrl = (item)=>{
+if(item.type === "Notice"){
+return `${FILES.NOTICES}/${item.pdf}`;
+}
+if(item.type === "Student"){
+return `${FILES.STUDENTS}/${item.pdf}`;
+}
+return null;
 };
 
 
@@ -109,18 +123,16 @@ loadAllData();
 };
 
 
-// ❌ DELETE (only notices)
+// ❌ DELETE
 const handleDelete = async(id)=>{
 
 if(!window.confirm("Delete notice?")) return;
 
 await fetch(`${API.BASE}/api/notices/${id}`,{
-
 method:"DELETE",
 headers:{
 Authorization:`Bearer ${token}`
 }
-
 });
 
 loadAllData();
@@ -138,6 +150,7 @@ return(
 <h2>📢 Latest Notices</h2>
 <p>Stay updated with all updates (Admissions, Events, Student)</p>
 </div>
+
 
 {/* ADMIN FORM */}
 {token &&(
@@ -180,6 +193,7 @@ Mark as Important
 
 )}
 
+
 {/* LIST */}
 <div className="notice-list">
 
@@ -198,14 +212,12 @@ className={`notice-card ${item.important ? "important":""}`}
 
 <h4>
 
-{/* 🔥 TYPE BADGE */}
 <span className={`type ${item.type}`}>
 {item.type}
 </span>
 
 {item.title}
 
-{/* IMPORTANT */}
 {item.important && (
 <span className="badge">NEW</span>
 )}
@@ -224,12 +236,14 @@ className={`notice-card ${item.important ? "important":""}`}
 
 </div>
 
+
 <div className="notice-right">
 
-{item.pdf && (
+{/* ✅ FINAL FIX */}
+{item.pdf && getFileUrl(item) && (
 <a
 className="view-btn"
-href={`${API.BASE}/uploads/${item.pdf}`}
+href={getFileUrl(item)}
 target="_blank"
 rel="noreferrer"
 >
@@ -237,7 +251,6 @@ View
 </a>
 )}
 
-{/* delete only notice */}
 {token && item.type==="Notice" &&(
 
 <button

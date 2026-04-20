@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { API } from "../../config/api"; 
-import { FILES } from "../../config/api";   // 👈 IMPORTANT
+import { API, FILES } from "../../config/api";
 import "./index.css";
 
 function AdmissionSection(){
@@ -13,6 +12,8 @@ const [pdf,setPdf] = useState(null);
 
 const token = localStorage.getItem("token");
 
+
+// 🔥 LOAD DATA
 useEffect(()=>{
 loadAdmissions();
 },[]);
@@ -25,9 +26,16 @@ fetch(`${API.BASE}/api/admissions`)
 
 };
 
+
+// ➕ ADD
 const handleAdd = async(e)=>{
 
 e.preventDefault();
+
+if(!pdf){
+alert("Select PDF file");
+return;
+}
 
 const formData = new FormData();
 
@@ -38,11 +46,9 @@ formData.append("pdf",pdf);
 await fetch(`${API.BASE}/api/admissions`,{
 
 method:"POST",
-
 headers:{
 Authorization:`Bearer ${token}`
 },
-
 body:formData
 
 });
@@ -57,6 +63,8 @@ loadAdmissions();
 
 };
 
+
+// ❌ DELETE
 const handleDelete = async(id)=>{
 
 if(!window.confirm("Delete admission notice?")) return;
@@ -64,7 +72,6 @@ if(!window.confirm("Delete admission notice?")) return;
 await fetch(`${API.BASE}/api/admissions/${id}`,{
 
 method:"DELETE",
-
 headers:{
 Authorization:`Bearer ${token}`
 }
@@ -75,12 +82,15 @@ loadAdmissions();
 
 };
 
+
 return(
 
 <div className="admission-section">
 
 <h2>Admissions</h2>
 
+
+{/* ADMIN FORM */}
 {token &&(
 
 <form className="admission-form" onSubmit={handleAdd}>
@@ -89,18 +99,21 @@ return(
 placeholder="Title"
 value={title}
 onChange={(e)=>setTitle(e.target.value)}
+required
 />
 
 <textarea
 placeholder="Description"
 value={description}
 onChange={(e)=>setDescription(e.target.value)}
+required
 />
 
 <input
 type="file"
 accept="application/pdf"
 onChange={(e)=>setPdf(e.target.files[0])}
+required
 />
 
 <button>Add Admission Notice</button>
@@ -109,9 +122,11 @@ onChange={(e)=>setPdf(e.target.files[0])}
 
 )}
 
+
+{/* LIST */}
 <div className="admission-list">
 
-{admissions.map(ad=>(
+{admissions.map((ad)=>(
 
 <div key={ad.id} className="admission-card">
 
@@ -122,7 +137,6 @@ onChange={(e)=>setPdf(e.target.files[0])}
 <div>
 
 <h4>{ad.title}</h4>
-
 <p>{ad.description}</p>
 
 </div>
@@ -131,13 +145,16 @@ onChange={(e)=>setPdf(e.target.files[0])}
 
 <div className="admission-right">
 
+{/* ✅ FIXED PDF LINK */}
+{ad.pdf_file && (
 <a
-href={`${FILES.GALLERY}/${ad.pdf_file}`}
+href={`${FILES.ADMISSIONS}/${ad.pdf_file}`}
 target="_blank"
 rel="noreferrer"
 >
 View PDF
 </a>
+)}
 
 {token &&(
 

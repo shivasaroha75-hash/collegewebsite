@@ -1,76 +1,73 @@
-/* navbar wrapper */
-
-.navbar-wrapper{
-width:100%;
-display:flex;
-justify-content:center;
-position:absolute;
-top:20px;
-z-index:100;
+/* BODY SPACE */
+body{
+padding-top:70px;
 }
 
-/* navbar */
 
+/* WRAPPER */
+.navbar-wrapper{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+z-index:1000;
+}
+
+
+/* NAVBAR */
 .navbar{
-width:90%;
-background:white;
-border-radius:40px;
-padding:10px 25px;
+width:100%;                 /* 🔥 full width */
+max-width:100%;
+padding:10px 20px;
+
 display:flex;
 align-items:center;
 justify-content:space-between;
-box-shadow:0 5px 20px rgba(0,0,0,0.1);
-position: fixed;
-top: 0;
-z-index: 1000;
+
+background:white;
+box-shadow:0 4px 15px rgba(0,0,0,0.08);
 }
 
-/* logo */
 
+/* LOGO */
 .logo-img{
-height:50px;
+height:40px;
 }
 
-/* links */
 
+/* LINKS RIGHT SIDE */
 .nav-links{
 display:flex;
 gap:20px;
 align-items:center;
+margin-left:auto;   /* 🔥 push right */
 }
 
 .nav-links a{
 text-decoration:none;
-color:#ff6a00;
-font-weight:600;
-font-size:20px;
+color:#333;
+font-weight:500;
+font-size:15px;
+transition:0.2s;
 }
 
-/* login button */
+.nav-links a:hover{
+color:#ff6a00;
+}
 
-.login-btn{
+
+/* BUTTON */
+.login-btn,
+.logout2{
 background:#ff6a00;
 color:white !important;
-padding:7px 18px;
+padding:6px 16px;
 border-radius:20px;
-border: 0px;
-}
-
-.login-btn:hover{
-background:#753f13;
-}
-
-.logout2{
-   background:#ff6a00;
-color:white !important;
-padding:6px 18px;
-border-radius:20px; 
-border: 0px;
+border:none;
 }
 
 
-/* hamburger */
-
+/* HAMBURGER */
 .menu-icon{
 display:none;
 font-size:26px;
@@ -78,7 +75,8 @@ cursor:pointer;
 color:#ff6a00;
 }
 
-/* MOBILE */
+
+/* ================= MOBILE ================= */
 
 @media(max-width:768px){
 
@@ -86,19 +84,29 @@ color:#ff6a00;
 display:block;
 }
 
+/* 🔥 MOBILE NAV FIX */
 .nav-links{
 position:absolute;
-top:80px;
-right:20px;
+top:60px;
+right:10px;
+
+width:180px;          /* 🔥 reduced width */
 background:white;
+
 flex-direction:column;
-gap:15px;
-padding:20px;
+align-items:flex-start;
+gap:12px;
+
+padding:15px;
 border-radius:10px;
-box-shadow:0 5px 20px rgba(0,0,0,0.15);
+
+box-shadow:0 8px 20px rgba(0,0,0,0.15);
+
 display:none;
+margin-left:0;        /* 🔥 reset */
 }
 
+/* SHOW MENU */
 .nav-links.active{
 display:flex;
 }
