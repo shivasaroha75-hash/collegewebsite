@@ -5,6 +5,7 @@ const path = require("path");
 
 const express = require("express");
 const cors = require("cors");
+  // 👈 अपना email डालो
 
 const app = express();
 
@@ -378,33 +379,49 @@ const courseTeacherStorage = multer.diskStorage({
 
 const uploadCourseTeacher = multer({ storage: courseTeacherStorage });
 
-// Admin Login API
-app.post("/api/admin/login", (req, res) => {
-  const { username, password } = req.body;
-
-  db.get(
-    "SELECT * FROM admins WHERE username = ? AND password = ?",
-    [username, password],
-    (err, admin) => {
-      if (err) {
-        return res.status(500).json({ message: "Database error" });
-      }
-
-      if (!admin) {
-        return res.status(401).json({ message: "Invalid credentials" });
-      }
-
-      const token = jwt.sign(
-        { id: admin.id, username: admin.username },
-        "secretkey",
-        { expiresIn: "1h" }
-      );
-
-      res.json({ token });
-    }
-  );
+const storage = multer.diskStorage({
+destination: (req,file,cb)=>{
+cb(null,"uploads/students");
+},
+filename: (req,file,cb)=>{
+cb(null, Date.now() + "-" + file.originalname);
+}
 });
 
+const uploadStudentPhoto = multer({ storage: storage });
+
+
+// 🔐 YOUR ADMIN CREDENTIALS
+const ADMIN_USERNAME = "ccsgdcchhaprauli";
+const ADMIN_PASSWORD = "ccs.chhaprauli.3958";
+
+// LOGIN API
+app.post("/api/admin/login", (req, res) => {
+
+const { username, password } = req.body;
+
+if (!username || !password) {
+return res.status(400).json({ message: "Username and password required" });
+}
+
+// ✅ normalize (optional)
+const user = username.trim();
+
+// ✅ check credentials
+if (user !== ADMIN_USERNAME || password !== ADMIN_PASSWORD) {
+return res.status(401).json({ message: "Invalid credentials" });
+}
+
+// ✅ generate token
+const token = jwt.sign(
+{ username: ADMIN_USERNAME },
+"secretkey",
+{ expiresIn: "2h" }
+);
+
+res.json({ token });
+
+});
 const auth = require("./middleware/auth");
 
 // ADD Notice (Admin only, with PDF)
@@ -1366,7 +1383,7 @@ app.delete("/api/calendar/:id", auth, (req, res) => {
 });
 // ================= STUDENT RESOURCES =================
 
-app.post("/api/student-resources", auth, uploadResource.single("file"), (req,res)=>{
+app.post("/api/student-resources", auth, uploadStudentPhoto.single("file"), (req,res)=>{
 
 const { title, type } = req.body;
 const file = req.file?.filename;
@@ -1429,152 +1446,6 @@ app.get("/debug/tables", (req, res) => {
   );
 });
 
-const nodemailer = require("nodemailer");
-
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-  user: "ccsgdc.chhaprauli@gmail.com",
-  pass: "srpg zhop vqqi xvbk"
-}
-
-});
-
-app.post("/api/send-otp-email", async (req,res)=>{
-
-const { email } = req.body;
-
-const otp = Math.floor(100000 + Math.random()*900000).toString();
-
-const expires = new Date(Date.now() + 5*60*1000);
-
-// DB में save करो
-db.run(
-"INSERT INTO otp_codes (phone, otp, expires_at) VALUES (?,?,?)",
-[email, otp, expires]
-);
-
-try{
-
-await transporter.sendMail({
-  from: "shivasaroha75@gmail.com",
-  to: email,
-  subject: "Your OTP Code",
-  html: `<h2>Your OTP is: ${otp}</h2>`
-});
-
-res.json({ message:"OTP sent to email" });
-
-}catch(err){
-console.log(err);
-res.status(500).json({ message:"Email failed" });
-}
-
-});
-
-app.post("/api/verify-otp-email",(req,res)=>{
-
-const { email, otp } = req.body;
-
-db.get(
-"SELECT * FROM otp_codes WHERE phone=? ORDER BY id DESC LIMIT 1",
-[email],
-(err,row)=>{
-
-if(!row) return res.status(400).json({message:"No OTP found"});
-
-if(row.otp !== otp){
-return res.status(400).json({message:"Invalid OTP"});
-}
-
-if(new Date() > new Date(row.expires_at)){
-return res.status(400).json({message:"OTP expired"});
-}
-
-db.run("DELETE FROM otp_codes WHERE phone=?", [email]);
-
-const token = require("jsonwebtoken").sign(
-{ email },
-"secretkey",
-{ expiresIn:"2h" }
-);
-
-res.json({ token });
-
-});
-
-});
-
-const axios = require("axios");
-
-app.post("/api/send-otp", async (req,res)=>{
-
-const { phone } = req.body;
-
-const otp = Math.floor(100000 + Math.random()*900000).toString();
-
-const expires = new Date(Date.now() + 5*60*1000);
-
-// DB में save करो
-db.run(
-"INSERT INTO otp_codes (phone, otp, expires_at) VALUES (?,?,?)",
-[phone, otp, expires]
-);
-
-try{
-
-await axios.get("https://www.fast2sms.com/dev/bulkV2", {
-params:{
-authorization:"j7g4OG3lQs9wah0ILZM5BXfPVzmrTRUJu8YcE1kxpivWqoHANyyfi0T43ZXjFp8U751qnElCvIoNA2Ye",
-variables_values: otp,
-route:"otp",
-numbers: phone
-}
-});
-
-console.log("OTP:", otp);
-
-res.json({ message:"OTP sent to mobile" });
-
-}catch(err){
-
-console.log(err.response?.data || err.message);
-
-res.status(500).json({ message:"SMS failed" });
-
-}
-
-});
-
-
-app.post("/api/verify-otp",(req,res)=>{
-
-const { phone, otp } = req.body;
-
-db.get(
-"SELECT * FROM otp_codes WHERE phone=? ORDER BY id DESC LIMIT 1",
-[phone],
-(err,row)=>{
-
-if(!row) return res.status(400).json({message:"No OTP found"});
-
-if(row.otp !== otp){
-return res.status(400).json({message:"Invalid OTP"});
-}
-
-if(new Date() > new Date(row.expires_at)){
-return res.status(400).json({message:"OTP expired"});
-}
-
-/* LOGIN SUCCESS */
-const token = jwt.sign({ phone }, "secretkey", { expiresIn:"2h" });
-
-res.json({ token });
-
-});
-
-});
-
 app.post("/api/notices", auth, uploadNotice.single("pdf"), (req,res)=>{
 
 const { title, description, important } = req.body;
@@ -1594,6 +1465,9 @@ res.json({ id:this.lastID });
 });
 
 });
+
+
+
 
 // start server
 const PORT = process.env.PORT || 5000;
