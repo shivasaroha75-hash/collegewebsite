@@ -213,7 +213,7 @@ className={`notice-card ${item.important ? "important":""}`}
 <h4>
 
 <span className={`type ${item.type}`}>
-{item.type}
+
 </span>
 
 {item.title}
