@@ -1,86 +1,89 @@
 import { useEffect, useState } from "react";
-import { API, FILES } from "../../config/api";   // 👈 IMPORTANT
+import { API, FILES } from "../../config/api";
 import "./index.css";
 
-function StudentSection(){
+function StudentSection() {
 
-const [data,setData] = useState([]);
-const [activeTab,setActiveTab] = useState("syllabus");
+  const [data, setData] = useState([]);
+  const [activeTab, setActiveTab] = useState("syllabus");
 
-useEffect(()=>{
-fetch(`${API.BASE}/api/student-resources`)
-.then(res=>res.json())
-.then(setData);
-},[]);
+  useEffect(() => {
+    fetch(`${API.BASE}/api/student-resources`)
+      .then(res => res.json())
+      .then(setData)
+      .catch(err => console.log(err));
+  }, []);
 
-const filtered = data.filter(d => d.type === activeTab);
+  const filtered = data.filter(d => d.type === activeTab);
 
-return(
+  // 🔥 SAME LOGIC AS NOTICE
+  const getFileUrl = (file) => {
+    return `${FILES.STUDENTS}/${file}`;
+  };
 
-<div className="student-bg">
+  return (
+    <div className="student-bg">
+      <div className="student-wrapper">
 
-<div className="student-wrapper">
+        <h2>🎓 Student Resources</h2>
 
-<h2>🎓 Student Resources</h2>
+        {/* TABS */}
+        <div className="tabs">
 
-{/* TABS */}
-<div className="tabs">
+          <button
+            className={activeTab === "syllabus" ? "active" : ""}
+            onClick={() => setActiveTab("syllabus")}
+          >
+            📚 Syllabus
+          </button>
 
-<button
-className={activeTab==="syllabus" ? "active" : ""}
-onClick={()=>setActiveTab("syllabus")}
->
-📚 Syllabus
-</button>
+          <button
+            className={activeTab === "timetable" ? "active" : ""}
+            onClick={() => setActiveTab("timetable")}
+          >
+            📅 Examination
+          </button>
 
-<button
-className={activeTab==="timetable" ? "active" : ""}
-onClick={()=>setActiveTab("timetable")}
->
-📅 Examination
-</button>
+        </div>
 
-</div>
+        {/* LIST */}
+        <div className="list-container">
 
-{/* LIST */}
-<div className="list-container">
+          {filtered.length === 0 ? (
+            <p className="empty">No data available</p>
+          ) : (
 
-{filtered.length === 0 ? (
-<p className="empty">No data available</p>
-) : (
+            filtered.map(item => (
 
-filtered.map(item => (
+              <div key={item.id} className="list-item">
 
-<div key={item.id} className="list-item">
+                <div className="left">
+                  <h4>{item.title}</h4>
+                </div>
 
-<div className="left">
-<h4>{item.title}</h4>
-</div>
+                {/* ✅ FINAL FIX */}
+                {item.file && (
+                  <a
+                    href={getFileUrl(item.file)}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="action-btn"
+                  >
+                    📄 Open
+                  </a>
+                )}
 
-{/* ✅ FIXED LIKE LATEST NOTICE */}
-<a
-href={`${FILES.STUDENTS}/${item.file}`}   // 🔥 IMPORTANT FIX
-target="_blank"
-rel="noreferrer"
-className="action-btn"
->
-📄 Open
-</a>
+              </div>
 
-</div>
+            ))
 
-))
+          )}
 
-)}
+        </div>
 
-</div>
-
-</div>
-
-</div>
-
-);
-
+      </div>
+    </div>
+  );
 }
 
 export default StudentSection;
