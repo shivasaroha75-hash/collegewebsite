@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { API } from "../../config/api";
+import { API, FILES } from "../../config/api";   // 👈 IMPORTANT
 import "./index.css";
 
 function StudentSection(){
@@ -9,7 +9,6 @@ const [activeTab,setActiveTab] = useState("syllabus");
 
 useEffect(()=>{
 fetch(`${API.BASE}/api/student-resources`)
-
 .then(res=>res.json())
 .then(setData);
 },[]);
@@ -56,11 +55,11 @@ filtered.map(item => (
 
 <div className="left">
 <h4>{item.title}</h4>
-
 </div>
 
+{/* ✅ FIXED LIKE LATEST NOTICE */}
 <a
-href={`${API.BASE}/uploads/resources/${item.file}`}
+href={`${FILES.STUDENTS}/${item.file}`}   // 🔥 IMPORTANT FIX
 target="_blank"
 rel="noreferrer"
 className="action-btn"
